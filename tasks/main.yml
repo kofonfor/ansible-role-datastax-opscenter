@@ -1,0 +1,9 @@
+- name: add DataStax Yum repo
+  yum_repository:
+    name: datastax
+    description: DataStax Repository
+    baseurl: https://{{ dsa_email_address }}:{{ dsa_password }}@rpm.datastax.com/enterprise
+    gpgcheck: no
+
+- name: install opscenter
+  yum: name=opscenter
