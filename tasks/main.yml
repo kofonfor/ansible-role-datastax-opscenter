@@ -7,3 +7,10 @@
 
 - name: install opscenter
   yum: name=opscenter
+
+- name: put opscenterd.conf
+  template: src=opscenterd.conf dest=/etc/opscenter/opscenterd.conf
+  register: opscenter_conf
+
+- name: start or restart opscenterd
+  service: name=opscenterd enabled=yes state={{ 'restarted' if opscenter_conf.changed else 'started' }}
